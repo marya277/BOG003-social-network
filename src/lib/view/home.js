@@ -1,7 +1,7 @@
 export const home = () => {
   const divHome = document.createElement('div');
   const viewHome = `
-  <p>bienvenido a andariegos</p>`;
+<h1>Home</h1>`;
   divHome.innerHTML = viewHome;
   return divHome;
 };
