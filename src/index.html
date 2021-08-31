@@ -22,5 +22,30 @@
   
   <script type="module" src="main.js"></script>
   
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+   <!-- Initialize Firebase -->
+   <script src="/__/firebase/init.js"></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBAMRuVlhA6-jPgGYAFyOzSc1HpAWAMsL8",
+      authDomain: "social-network-andariegos.firebaseapp.com",
+      projectId: "social-network-andariegos",
+      storageBucket: "social-network-andariegos.appspot.com",
+      messagingSenderId: "277491202137",
+      appId: "1:277491202137:web:34437978ace64dd705d948"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+  
 </body>
 </html>
