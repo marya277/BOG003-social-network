@@ -1,12 +1,11 @@
-import { home } from './view/home.js';
 import { create } from './view/create.js';
 import { profile } from './view/profile.js';
-import { menu } from './view/menu.js';
+import { home } from './view/homepage.js';
 import { timeLine } from './view/timeLine.js';
 
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
-  containerRoot.innerHTML = menu();
+  containerRoot.innerHTML = home();
 
   switch (hash) {
     case '#/':

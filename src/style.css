@@ -1,0 +1,115 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0%;
+    
+}
+
+.headerPrincipal{
+  background: rgb(127,219,218);
+  background: linear-gradient(0deg, rgba(127,219,218,1) 18%, rgba(228,240,181,1) 100%);
+  height: 10vh;
+}
+
+.footerPrincipal {
+  background: rgb(228,240,181);
+  background: linear-gradient(0deg, rgba(228,240,181,1) 0%, rgba(127,219,218,1) 83%);
+  height: 7vh;
+}
+
+/* Pagina Principal - Bienvenida al usuario*/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  height: auto;
+}
+
+.bienvenida {
+  background-color: #E4F0B5;
+  margin-left: 20%;
+  margin-right: 20%;
+  height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+}
+
+h1 {
+  font-size: 25px;
+  margin: 10px;
+  color: rgb(22, 24, 24);
+}
+
+.bienvenida figure {
+  margin: 0px;
+}
+
+img {
+  margin-top: 30px;
+  width: 50%;
+  height: 50%;
+}
+
+h4 {
+  font: 10px;
+  margin: 10px;
+  color: rgb(22, 24, 24);
+}
+
+/*Pagina Principal - Formulario de inicio de sesión*/
+
+.LogIn {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+}
+
+.LogIn_input {
+  background-color: #E4F0B5;
+  width: 80%;
+  height: 20px;
+  margin-top: 10px;
+  border: 3px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+}
+
+.btonSesion {
+  margin-top: 20px;
+  width: 40%;
+  height: 30px;
+  background-color: #FAC45B;
+  border: 3px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+}
+
+/*Pagina Principal - Iniciar sesion con Google*/
+
+.google {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+}
+
+.btnGoogle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.btnGoogle input {
+  width: 40px;
+  height: 40px;
+}
+
+.google p {
+  margin-top: 10px;
+}
+
+.google button {
+  margin: 0px;
+}
+
