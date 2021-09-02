@@ -1,3 +1,5 @@
+import { login } from '../index.js';
+
 export const home = () => {
   const viewHome = `
   <header >
@@ -20,7 +22,7 @@ export const home = () => {
       </form>
     <div class="google">
       <div class="btnGoogle">
-      <input type="image" src="img/Google.png" alt="google">
+      <input type="image"   id="btnGoogle" src="img/Google.png" alt="google">
       </div>
 
       <p>¿No tienes una cuenta?</p>
@@ -28,6 +30,14 @@ export const home = () => {
     </div>
     </section>
   `;
+  //
+  setTimeout(() => {
+    const btnGoogle = document.getElementById('btnGoogle');
+    btnGoogle.addEventListener('click', () => {
+      login();
+    });
+  }, 1000);
+
   return viewHome;
 };
 
