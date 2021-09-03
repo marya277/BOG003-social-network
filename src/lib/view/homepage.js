@@ -1,4 +1,5 @@
 import { login } from '../index.js';
+import { create } from './create.js';
 
 export const home = () => {
   const viewHome = `
@@ -26,26 +27,33 @@ export const home = () => {
       <input type="image"   id="btnGoogle" src="img/Google.png" alt="google">
       </div>
       <p>¿No tienes una cuenta?</p>
-      <button class="btonSesion" id="btnCreate">Crear cuenta</button>
+      <a href="#/create">
+      <button class="btonSesion" id="btnCreate" >Crear cuenta</button>
+      </
     </div>
     </div>
     </section>
     <footer class="footerPrincipal"></footer>
   `;
-  //
+  // Autenticación de Google
   setTimeout(() => {
     const btnGoogle = document.getElementById('btnGoogle');
     btnGoogle.addEventListener('click', () => {
       login();
     });
   }, 1000);
-
+  setTimeout(() => {
+    const btnCreate = document.getElementById('btnCreate');
+    btnCreate.addEventListener('click', () => {
+      create();
+    });
+  }, 1000);
   return viewHome;
 };
 
 /* <ul>
 <li><a href="#/">Inicio</a></li>
-<li><a href="#/create">Crear Cuenta</a></li>
+<li><a href="#/create"></a></li>
 <li><a href="#/profile">Mi Perfil</a></li>
 <li><a href="#/timeLine">Muro</a></li>
 </ul>

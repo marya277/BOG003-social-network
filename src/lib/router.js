@@ -25,6 +25,7 @@ const showTemplate = (hash) => {
 <h3>Pagina no Encontrada</h3>`;
   }
 };
+
 export const changeRoute = (hash) => {
   if (hash === '#/') {
     return showTemplate(hash);
