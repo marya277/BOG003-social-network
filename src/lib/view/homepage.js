@@ -15,6 +15,7 @@ export const home = () => {
         <h4>Una Red Social para viajeros<br>Comparte tus experiencias con otros</h4>
       </center>
       </div>
+      <div class="desktop">
       <form class="LogIn">
         <input type="text" placeholder="Email" class="LogIn_input">
         <input type="text" placeholder="Password" class="LogIn_input">
@@ -24,11 +25,12 @@ export const home = () => {
       <div class="btnGoogle">
       <input type="image"   id="btnGoogle" src="img/Google.png" alt="google">
       </div>
-
       <p>¿No tienes una cuenta?</p>
       <button class="btonSesion" id="btnCreate">Crear cuenta</button>
     </div>
+    </div>
     </section>
+    <footer class="footerPrincipal"></footer>
   `;
   //
   setTimeout(() => {
