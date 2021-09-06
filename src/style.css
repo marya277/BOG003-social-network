@@ -187,3 +187,9 @@ h4 {
     margin-top: 40px;
   }
 }
+/* estilos formulario crear cuenta*/
+.img_create{
+  margin-top: 10px;
+  width: 30%;
+  height: 30%;
+}
