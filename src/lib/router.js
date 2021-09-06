@@ -3,9 +3,9 @@ import { profile } from './view/profile.js';
 import { home } from './view/homepage.js';
 import { timeLine } from './view/timeLine.js';
 
-const showTemplate = (hash) => {
+export const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
-  containerRoot.innerHTML = home();
+  containerRoot.innerHTML = '';
 
   switch (hash) {
     case '#/':
@@ -26,11 +26,11 @@ const showTemplate = (hash) => {
   }
 };
 
-export const changeRoute = (hash) => {
+/* export const changeRoute = (hash) => {
   if (hash === '#/') {
     return showTemplate(hash);
   } if (hash === '#/create') {
     return showTemplate(hash);
   }
   return showTemplate(hash);
-};
+}; */
