@@ -29,7 +29,7 @@ export const home = () => {
       <p>¿No tienes una cuenta?</p>
       <a href="#/create">
       <button class="btonSesion" id="btnCreate" >Crear cuenta</button>
-      </
+      </a>
     </div>
     </div>
     </section>
