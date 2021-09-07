@@ -1,5 +1,4 @@
 import { login } from '../index.js';
-import { create } from './create.js';
 
 export const home = () => {
   const viewHome = `
@@ -40,12 +39,6 @@ export const home = () => {
     const btnGoogle = document.getElementById('btnGoogle');
     btnGoogle.addEventListener('click', () => {
       login();
-    });
-  }, 1000);
-  setTimeout(() => {
-    const btnCreate = document.getElementById('btnCreate');
-    btnCreate.addEventListener('click', () => {
-      create();
     });
   }, 1000);
   return viewHome;
