@@ -3,13 +3,11 @@ import { profile } from './view/profile.js';
 import { home } from './view/homepage.js';
 import { timeLine } from './view/timeLine.js';
 
+// Se realizan las Rutas de nuestra SPA
 export const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
-
-  console.log(hash);
   if (!hash || hash === '') {
     containerRoot.innerHTML = home();
-    // containerRoot.appendChild(home());
   } else if (hash === '#/create') {
     containerRoot.innerHTML = '';
     containerRoot.appendChild(create());
