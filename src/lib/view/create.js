@@ -1,9 +1,8 @@
-import { validator } from '../index.js';
+// import { validator } from '../index.js';
 
 export const create = () => {
   const divCreate = document.createElement('div');
   const viewCreate = `
-
   <header>
   <div class="headerPrincipal" ></div>
   </header>
@@ -36,40 +35,56 @@ export const create = () => {
 
     <div class="form_send">
       <center>
-          <button type="submit" class="send" id="">Enviar</button>
-          <p class="form_confirmation_message" id="form_confirmation_message">Formulario enviado exitosamente!</p>
+          <button type="submit" class="send" id="send">Enviar</button>
+          <p class="form_confirmation_message" id="form_confirmation_message"></p>
+          <p class="form_denied_message" id="form_denied_message"></p>
       </center>
   </form>
 </section>
 <footer class="footerPrincipal"></footer>
 `;
   divCreate.innerHTML = viewCreate;
-  // Eventos de los Inputs --Usuario--Email--Contraseña
-  setTimeout(() => {
-    const email = document.getElementById('email');
-    email.addEventListener('change', validator);
-  }, 1000);
 
-  setTimeout(() => {
-    const userCreate = document.getElementById('user_create');
-    userCreate.addEventListener('change', validator);
-  }, 1000);
+  const btnSend = divCreate.querySelector('#send');
+  const userCreate = divCreate.querySelector('#user_create');
+  const email = divCreate.querySelector('#email');
+  const passwordCreate = divCreate.querySelector('#password_create');
+  const passwordConfirmation = divCreate.querySelector('#password2_create');
+  const messageToUser = divCreate.querySelector('#form_denied_message');
 
-  setTimeout(() => {
-    const passwordCreate = document.getElementById('password_create');
-    passwordCreate.addEventListener('change', validator);
-  }, 1000);
-
-  setTimeout(() => {
-    const passwordCreate2 = document.getElementById('password2_create');
-    passwordCreate2.addEventListener('change', validator);
-  }, 1000);
-
-  // setTimeout(() => {
-  // const send = document.getElementById('send');
-  // send.addEventListener('sumit', (e) => {
-  // e.preventDefault();
-  // });
-  // }, 1000);
+  userCreate.addEventListener('change', () => {
+    if (userCreate.value.length > 8) {
+      console.log('valido');
+    } else {
+      messageToUser.innerHTML = `
+      Usuario no Valido`;
+    }
+  });
+  email.addEventListener('change', () => {
+    const expressionsEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (expressionsEmail.test(email.value)) {
+      console.log('valido');
+    } else {
+      console.log('no valido');
+    }
+  });
+  passwordCreate.addEventListener('change', () => {
+    const password = /^.{4,12}$/;
+    if (password.test(passwordCreate.value)) {
+      console.log('valido');
+    } else {
+      console.log('no valido');
+    }
+  });
+  passwordConfirmation.addEventListener('change', () => {
+    if (passwordCreate.value !== passwordConfirmation.value) {
+      console.log('Diferentes');
+    } else {
+      console.log('Iguales');
+    }
+  });
+  btnSend.addEventListener('clic', (e) => {
+    e.preventDefault();
+  });
   return divCreate;
 };

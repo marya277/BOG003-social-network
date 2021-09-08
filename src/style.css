@@ -283,7 +283,12 @@ h4 {
 }
 .form_confirmation_message {
   font-size: 14px;
-  color: rgb(22, 24, 24);;
+  color: rgb(22, 24, 24);
+  display: none;
+}
+.form_denied_message {
+  font-size: 14px;
+  color: red;
   display: none;
 }
 
