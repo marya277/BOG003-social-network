@@ -1,9 +1,8 @@
-import { validator } from '../index.js';
+// import { validator } from '../index.js';
 
 export const create = () => {
   const divCreate = document.createElement('div');
   const viewCreate = `
-
   <header>
   <div class="headerPrincipal" ></div>
   </header>
@@ -19,57 +18,80 @@ export const create = () => {
         <input type="text" class="form__input" id="user_create" placeholder="Usuario" required>
    </div>
 
-    <div class="input_create">
+   <div class="input_create">
       <i class="fas fa-envelope"></i>
-      <input type="text" class="form__input" id="email" placeholder="@Correo" required>
+      <input type="email" class="form__input" id="email" placeholder="@Correo" required>
     </div>
 
     <div class="input_create">
       <i class="fas fa-unlock-alt"></i>
-      <input type="text" class="form__input" id="password_create" placeholder="Contraseña" required>
+      <input type="password" class="form__input" id="password_create" placeholder="Contraseña" required>
     </div>
 
     <div class="input_create">
       <i class="fas fa-lock"></i>
-      <input type="text" class="form__input" id="password2_create" placeholder="Confirmar contraseña" required>
+      <input type="password" class="form__input" id="password2_create" placeholder="Confirmar contraseña" required>     
     </div>
+    <p class="form_denied_message" id="form_denied_message"></p>
 
     <div class="form_send">
       <center>
-          <button type="submit" class="send" id="">Enviar</button>
-          <p class="form_confirmation_message" id="form_confirmation_message">Formulario enviado exitosamente!</p>
+          <button type="submit" class="send" id="send">Enviar</button>
+          <p class="form_confirmation_message" id="form_confirmation_message"></p>
       </center>
   </form>
 </section>
 <footer class="footerPrincipal"></footer>
 `;
   divCreate.innerHTML = viewCreate;
-  // Eventos de los Inputs --Usuario--Email--Contraseña
-  setTimeout(() => {
-    const email = document.getElementById('email');
-    email.addEventListener('change', validator);
-  }, 1000);
 
-  setTimeout(() => {
-    const userCreate = document.getElementById('user_create');
-    userCreate.addEventListener('change', validator);
-  }, 1000);
+  const btnSend = divCreate.querySelector('#send');
+  const userCreate = divCreate.querySelector('#user_create');
+  const email = divCreate.querySelector('#email');
+  const passwordCreate = divCreate.querySelector('#password_create');
+  const passwordConfirmation = divCreate.querySelector('#password2_create');
+  const messageToUser = divCreate.querySelector('#form_denied_message');
 
-  setTimeout(() => {
-    const passwordCreate = document.getElementById('password_create');
-    passwordCreate.addEventListener('change', validator);
-  }, 1000);
-
-  setTimeout(() => {
-    const passwordCreate2 = document.getElementById('password2_create');
-    passwordCreate2.addEventListener('change', validator);
-  }, 1000);
-
-  // setTimeout(() => {
-  // const send = document.getElementById('send');
-  // send.addEventListener('sumit', (e) => {
-  // e.preventDefault();
-  // });
-  // }, 1000);
+  userCreate.addEventListener('change', () => {
+    if (userCreate.value.length > 8) {
+      messageToUser.style.display = 'none';
+    } else {
+      messageToUser.innerHTML = `
+      Usuario debe ser mínimo 4 caracteres, máximo 12 caracteres`;
+      messageToUser.style.display = 'block';
+    }
+  });
+  email.addEventListener('change', () => {
+    const expressionsEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (expressionsEmail.test(email.value)) {
+      messageToUser.style.display = 'none';
+    } else {
+      messageToUser.innerHTML = `
+      Ingrese un correo valido`;
+      messageToUser.style.display = 'block';
+    }
+  });
+  passwordCreate.addEventListener('change', () => {
+    const password = /^.{6,12}$/;
+    if (password.test(passwordCreate.value)) {
+      messageToUser.style.display = 'none';
+    } else {
+      messageToUser.innerHTML = `
+      Contraseña debe ser mínimo 6 caracteres, máximo 12 caracteres`;
+      messageToUser.style.display = 'block';
+    }
+  });
+  passwordConfirmation.addEventListener('change', () => {
+    if (passwordCreate.value !== passwordConfirmation.value) {
+      messageToUser.innerHTML = `
+      La Contraseña no coincide`;
+      messageToUser.style.display = 'block';
+    } else {
+      messageToUser.style.display = 'none';
+    }
+  });
+  btnSend.addEventListener('clic', (e) => {
+    e.preventDefault();
+  });
   return divCreate;
 };
