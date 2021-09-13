@@ -17,8 +17,10 @@ export const home = () => {
       </div>
       <div class="desktop">
       <form class="LogIn">
-        <input type="text" placeholder="Email" class="LogIn_input">
-        <input type="text" placeholder="Password" class="LogIn_input">
+        <input type="email" placeholder="Email" class="LogIn_input" id="login_email">
+        <input type="password" placeholder="Password" class="LogIn_input"  id= "login_password">
+        <p class="form_denied_message" id="form_denied_message"></p>
+
         <button type="submit" class="btonSesion" id="btonSesion">Iniciar Sesión</button>
       </form>
     <div class="google">
@@ -41,6 +43,37 @@ export const home = () => {
       loginGoogle();
     });
   }, 1000);
+  setTimeout(() => {
+    const btonSesion = document.getElementById('btonSesion');
+    const btnLoginemail = document.getElementById('login_email');
+    const btnLoginPassword = document.getElementById('login_password');
+    const messageConfirm = document.getElementById('form_denied_message');
+    btonSesion.addEventListener('click', (e) => {
+      e.preventDefault();
+      const inputEmail = btnLoginemail.value;
+      const inputPassword = btnLoginPassword.value;
+      firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword)
+        .then((result) => {
+        // Signed in
+          if (result.user.emailVerified) {
+            window.location.hash = '#/timeLine';
+          } else {
+            firebase.auth().singout();
+            messageConfirm.innerHTML = `
+            ⚠️ Por favor, verifique su correo y confirme su cuenta`;
+            messageConfirm.style.display = 'block';
+          }
+          // const user = userCredential.user;
+        // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode);
+          console.log(errorMessage);
+        });
+    });
+  }, 4000);
   return viewHome;
 };
 

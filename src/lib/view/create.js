@@ -112,10 +112,6 @@ export const create = () => {
           // Se saca al usuario de la cuenta, para que valide su email y pueda ingresar verificado
           auth.signOut();
           messageConfirm.innerHTML = `
-        ✅ Por favor, verifique su correo y confirme su cuenta`;
-          messageConfirm.style.display = 'block';
-
-          messageConfirm.innerHTML = `
         ✅ Usuario Registrado. Por favor, verifique su correo y confirme su cuenta`;
           messageConfirm.style.display = 'block';
           // se redirecciona al usuario a la pagina principal
