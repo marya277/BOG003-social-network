@@ -1,10 +1,21 @@
-// aqui exportaras las funciones que necesites
+// Funcion para ingresar con Cuenta Registrada
 
-export const myFunction = () => {
-  // aqui tu codigo
+export const loginRegister = () => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+    // Signed in
+      const user = userCredential.user;
+    // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('errorCode');
+    });
 };
 
-export const login = () => {
+// Función para ingresar con cuenta Google.
+export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase
     .auth()
@@ -12,7 +23,7 @@ export const login = () => {
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
       // const credential = result.credential;
-
+      window.location.hash = '#/timeLine';
       // This gives you a Google Access Token. You can use it to access the Google API.
       // const token = credential.accessToken;
       // The signed-in user info.

@@ -1,4 +1,4 @@
-import { login } from '../index.js';
+import { loginGoogle } from '../index.js';
 
 export const home = () => {
   const viewHome = `
@@ -38,7 +38,7 @@ export const home = () => {
   setTimeout(() => {
     const btnGoogle = document.getElementById('btnGoogle');
     btnGoogle.addEventListener('click', () => {
-      login();
+      loginGoogle();
     });
   }, 1000);
   return viewHome;
