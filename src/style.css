@@ -379,3 +379,49 @@ h4 {
     font-size: 20px;
   }
  }
+                          /* estilos TimeLine*/
+
+.containerTimeLine {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(4, 1fr);
+
+}
+.headerPrincipal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.imgTimeLine {
+  width: 20%;
+  height: 80%;
+  margin-left: 5%;
+}
+.icon {
+  margin-top: 13px;
+  color: black;
+  cursor: pointer;
+  margin-right: 15px;
+}
+@media only screen and (min-width: 600px) {
+  .imgTimeLine {
+    margin-top: 10px;
+  }
+  .icon {
+    margin-top: 42px;
+    font-size: 30px;
+    margin-right: 25px;
+  }
+  
+}
+@media only screen and (min-width: 1024px) {
+  .imgTimeLine {
+    width: 10%;
+  }
+  .icon {
+    position: inherit;
+    margin-top: 30px;
+    font-size: 20px;
+    margin-left: 70px;
+  }
+}

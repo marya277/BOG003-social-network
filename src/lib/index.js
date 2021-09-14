@@ -1,19 +1,5 @@
 // Funcion para ingresar con Cuenta Registrada
 
-export const loginRegister = () => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-    // Signed in
-      const user = userCredential.user;
-    // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log('errorCode');
-    });
-};
-
 // Función para ingresar con cuenta Google.
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
