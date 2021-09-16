@@ -1,3 +1,5 @@
+import { createPost } from '../index.js';
+
 export const timeLine = () => {
   const divTimeLine = document.createElement('div');
   const viewTimeLine = `
@@ -13,6 +15,7 @@ export const timeLine = () => {
     <div class="toPost" id="toPost">
       <img id="photoProfile" src="img/iconProfile1.png">
       <input id="publication" placeholder="¿Qué te gustaria compartir?"></input>
+      <p class="form_denied_message" id="form_denied_message"></p>
       <button id="btnPost">Publicar</button>
     </div>
     <div class="dos"></div>
@@ -22,6 +25,9 @@ export const timeLine = () => {
   divTimeLine.innerHTML = viewTimeLine;
 
   const exit = divTimeLine.querySelector('#exit');
+  const btnPost = divTimeLine.querySelector('#btnPost');
+  const publication = divTimeLine.querySelector('#publication');
+  const messageToUser = divTimeLine.querySelector('#form_denied_message');
 
   exit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -36,15 +42,23 @@ export const timeLine = () => {
         console.log(errorMessage);
       });
   });
+
+  btnPost.addEventListener('click', (e) => {
+    e.preventDefault();
+    const user = firebase.auth().currentUser;
+    const description = publication.value;
+
+    if (user == null) {
+      messageToUser.innerHTML = `
+      ⚠️ para crear el post debe esta logueado`;
+      messageToUser.style.display = 'block';
+    } else {
+      createPost(
+        user.uid,
+        user.email,
+        description,
+      );
+    }
+  });
   return divTimeLine;
 };
-setTimeout(() => {
-  switch (window.location.hash) {
-    case '#/timeLine':
-      document.getElementById('root').innerHTML = '';
-      document.getElementById('root').appendChild(timeLine());
-      break;
-    default:
-      break;
-  }
-}, 1000);
