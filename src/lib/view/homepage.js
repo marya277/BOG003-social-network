@@ -58,10 +58,10 @@ export const home = () => {
           if (result.user.emailVerified) {
             window.location.hash = '#/timeLine';
           } else {
-            firebase.auth().singout();
             messageConfirm.innerHTML = `
             ⚠️ Por favor, verifique su correo y confirme su cuenta`;
             messageConfirm.style.display = 'block';
+            firebase.auth().singout();
           }
           // const user = userCredential.user;
         // ...
@@ -71,6 +71,20 @@ export const home = () => {
           const errorMessage = error.message;
           console.log(errorCode);
           console.log(errorMessage);
+          switch (errorCode) {
+            case 'auth/user-not-found':
+              messageConfirm.innerHTML = `
+              ⚠️ Este correo no esta registrado`;
+              messageConfirm.style.display = 'block';
+              break;
+            case 'auth/wrong-password':
+              messageConfirm.innerHTML = `
+              ⚠️ Contraseña Incorrecta`;
+              messageConfirm.style.display = 'block';
+              break;
+            default:
+              break;
+          }
         });
     });
   }, 4000);

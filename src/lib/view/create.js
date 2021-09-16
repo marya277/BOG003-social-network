@@ -131,6 +131,11 @@ export const create = () => {
               ⚠️ Error al enviar formulario. Este email ya esta registrado`;
               messageToUser.style.display = 'block';
               break;
+            case 'auth/invalid-display-name':
+              messageToUser.innerHTML = `
+              ⚠️ Error al enviar formulario. Por favor, ingrese un nombre de Usuario`;
+              messageToUser.style.display = 'block';
+              break;
             case 'auth/invalid-email':
               messageToUser.innerHTML = `
               ⚠️ Error al enviar formulario. Por favor, ingrese un Email valido`;
@@ -147,5 +152,6 @@ export const create = () => {
         });
     }
   });
+  console.log(divCreate);
   return divCreate;
 };
