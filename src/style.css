@@ -384,8 +384,8 @@ h4 {
 .containerTimeLine {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: repeat(4, 1fr);
-
+  grid-template-rows: 100px auto;
+  grid-row-gap: 30px;
 }
 .headerPrincipal {
   display: flex;
@@ -407,7 +407,10 @@ h4 {
 .toPost {
   display: grid;
   grid-template-columns: auto 3fr;
-  grid-gap: 10px;
+  grid-gap: 5px;
+  height: 50px;
+  align-content: stretch;
+  justify-items: center;
 }
 .toPost img {
   grid-column: 1;
@@ -421,7 +424,7 @@ h4 {
 .toPost input {
   grid-column: 2;
   width: 90%;
-  height: auto;
+  height: 50px;
   margin-top: 10px;
   margin-left: 10px;
   border-radius: 10px;
@@ -436,13 +439,47 @@ h4 {
   grid-column: 3;
   background-color: #FAC45B;
   width: 70px;
+  height: 35px;
   margin-top: 10px;
   font-size: 12px;
   border-radius: 10px;
   border: 1px solid transparent;
   margin-right: 10px;
+  margin-left: 25px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
+}
+.message_denied {
+  grid-column: 2;
+  margin: 0;
+  justify-content: center;
+  display: none;
+  color: red;
+  font-size: 14px;
+}
+.cards .card_publication {
+  margin: 20px;
+  background-color: #E4F0B5;
+  height: 0 auto;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  float: left;
+}
+.card_publication h5 {
+  margin-left: 30px;
+  margin-bottom: 0;
+}
+.card_publication i {
+  margin-right: 25px;
+  color: black;
+  float: right;
+}
+.card_publication p {
+  justify-content: center;
+  width: 90%;
+  height: 0 auto;
+  margin-left: 15px;
+  float: left;
 }
 @media only screen and (min-width: 600px) {
   .imgTimeLine {

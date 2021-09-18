@@ -63,8 +63,6 @@ export const home = () => {
             messageConfirm.style.display = 'block';
             firebase.auth().singout();
           }
-          // const user = userCredential.user;
-        // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -90,11 +88,3 @@ export const home = () => {
   }, 4000);
   return viewHome;
 };
-
-/* <ul>
-<li><a href="#/">Inicio</a></li>
-<li><a href="#/create"></a></li>
-<li><a href="#/profile">Mi Perfil</a></li>
-<li><a href="#/timeLine">Muro</a></li>
-</ul>
-*/
