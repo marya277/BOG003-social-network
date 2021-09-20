@@ -32,37 +32,39 @@ export const timeLine = () => {
 
   const showPost = () => {
     const db = firebase.firestore();
-
-    db.collection('posts').onSnapshot((querySnapshot) => {
-      const changes = querySnapshot.docChanges();
-      changes.forEach((change) => {
-        console.log(change.doc.data());
-        const cards = divTimeLine.querySelector('#cards');
-        cards.innerHTML += `
-        <div class="card_publication">
-        <h5>${change.doc.data().uid}<i class="fas fa-ellipsis-v"></i></h5>
-        <p>${change.doc.data().description}</p>
-        <p>${change.doc.data().fecha.toDate()}</p>
-        </div>`;
-      });
-    });
-  };
-  /* const showPost = () => {
-    const db = firebase.firestore();
-
-    db.collection('posts').get().then((querySnapshot) => {
+    const cards = divTimeLine.querySelector('#cards');
+    cards.innerHTML = '';
+    db.collection('posts').orderBy('fecha', 'desc').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-        const cards = divTimeLine.querySelector('#cards');
         cards.innerHTML += `
         <div class="card_publication">
-        <h5>${doc.data().uid}</h5>
-        <p>${doc.data().fecha.toDate()}</p>
-        <p>${doc.data().description}</p>
+        <div class="menu">
+              <i class="fas fa-ellipsis-v" id="menu">
+                <li class"option" id="">Editar</li>
+                <li class"option" id="">Borrar</li>
+              </i>
+          </div>
+          <h5>${doc.data().displayName}</h5>
+          <p>${doc.data().description}</p>
+          <p>${doc.data().fecha ? doc.data().fecha.toDate() : 'sin fecha'}</p>
         </div>`;
+
+        const menu = divTimeLine.querySelector('#menu');
+        const options = divTimeLine.querySelector('.option');
+
+        menu.addEventListener('click', () => {
+          options.style.display = 'block';
+          console.log('presionaste menu');
+        });
       });
-    });
-  }; */
+    })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
 
   exit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -96,10 +98,13 @@ export const timeLine = () => {
       }, 3000);
     } else {
       createPost(
-        user.displayName,
+        user.uid,
         user.email,
         description,
-      );
+        user.displayName,
+      ).then(() => {
+        showPost();
+      });
     }
   });
   showPost();

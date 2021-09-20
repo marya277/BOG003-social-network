@@ -25,13 +25,14 @@ export const loginGoogle = () => {
     });
 };
 //  Función que crea una colección de las publicaciones
-export const createPost = (uid, email, description) => {
+export const createPost = (uid, email, description, displayName) => {
   const db = firebase.firestore();
 
-  db.collection('posts').add({
+  return db.collection('posts').add({
     uid,
     email,
     description,
+    displayName,
     fecha: firebase.firestore.FieldValue.serverTimestamp(),
   })
     .then((refDoc) => {
