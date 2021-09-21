@@ -91,17 +91,17 @@ export const create = () => {
       // Se realiza la autenticacion para email y password
       const valueEmail = email.value;
       const password = passwordConfirmation.value;
-      const Username = userCreate.value;
+      const userName = userCreate.value;
       auth.createUserWithEmailAndPassword(valueEmail, password)
         // Se guarda el dato de nombre de Usuario
         .then((result) => {
           result.user.updateProfile({
-            displayName: Username,
+            displayName: userName,
           });
-          /* Se le envia un correo de verificaion al usuario, correo que al aceptar lo redirige a
-      nuestra pagina, si no valida, firebase no lo dejara registrado */
+          /* Se le envia un correo de verificación al usuario, correo que al aceptar lo redirija a
+            nuestra pagina, si no valida, firebase no lo dejara registrado */
           const config = {
-            url: 'http://127.0.0.1:5500/src/index.html#',
+            url: 'https://gleysiascanio.github.io/BOG003-social-network/src/index.html',
           };
           result.user.sendEmailVerification(config).catch((error) => {
             const errorCode = error.code;
@@ -109,22 +109,19 @@ export const create = () => {
             console.log(errorCode);
             console.log(errorMessage);
           });
-          // Se saca al usuario de la cuenta, para que valide su email y pueda ingresar verificado
-          auth.signOut();
           messageConfirm.innerHTML = `
-        ✅ Usuario Registrado. Por favor, verifique su correo y confirme su cuenta`;
+          ✅ Usuario Registrado. Por favor, verifique su correo y confirme su cuenta`;
           messageConfirm.style.display = 'block';
+          // Se saca al usuario de la cuenta, para que valide su email y pueda ingresar verificado
           // se redirecciona al usuario a la pagina principal
           setTimeout(() => {
             window.location.hash = '';
-          }, 3000);
-        // const user = userCredential.user; (userCredencial usandose en then como argumento)
+            auth.signOut();
+          }, 5000);
+          // const user = userCredential.user; (userCredencial usandose en then como argumento)
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode);
-          console.log(errorMessage);
           switch (errorCode) {
             case 'auth/email-already-in-use':
               messageToUser.innerHTML = `
@@ -152,6 +149,5 @@ export const create = () => {
         });
     }
   });
-  console.log(divCreate);
   return divCreate;
 };

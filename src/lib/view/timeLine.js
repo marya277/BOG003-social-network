@@ -15,10 +15,11 @@ export const timeLine = () => {
     <div class="toPost" id="toPost">
       <img id="photoProfile" src="img/iconProfile1.png">
       <input id="publication" placeholder="¿Qué te gustaria compartir?"></input>
-      <p class="form_denied_message" id="form_denied_message"></p>
       <button id="btnPost">Publicar</button>
+      <p class="message_denied" id="form_denied_message"></p>
     </div>
-    <div class="dos"></div>
+    <div class="cards" id="cards">
+    </div>
     <div class="tres"></div>
     <div class="cuatro"></div>
   </section>`;
@@ -28,6 +29,42 @@ export const timeLine = () => {
   const btnPost = divTimeLine.querySelector('#btnPost');
   const publication = divTimeLine.querySelector('#publication');
   const messageToUser = divTimeLine.querySelector('#form_denied_message');
+
+  const showPost = () => {
+    const db = firebase.firestore();
+    const cards = divTimeLine.querySelector('#cards');
+    cards.innerHTML = '';
+    db.collection('posts').orderBy('fecha', 'desc').get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        cards.innerHTML += `
+        <div class="card_publication">
+        <div class="menu">
+              <i class="fas fa-ellipsis-v" id="menu">
+                <li class"option" id="">Editar</li>
+                <li class"option" id="">Borrar</li>
+              </i>
+          </div>
+          <h5>${doc.data().displayName}</h5>
+          <p>${doc.data().description}</p>
+          <p>${doc.data().fecha ? doc.data().fecha.toDate() : 'sin fecha'}</p>
+        </div>`;
+
+        const menu = divTimeLine.querySelector('#menu');
+        const options = divTimeLine.querySelector('.option');
+
+        menu.addEventListener('click', () => {
+          options.style.display = 'block';
+          console.log('presionaste menu');
+        });
+      });
+    })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
 
   exit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -52,13 +89,24 @@ export const timeLine = () => {
       messageToUser.innerHTML = `
       ⚠️ para crear el post debe esta logueado`;
       messageToUser.style.display = 'block';
+    } else if (description === '') {
+      messageToUser.innerHTML = `
+      ⚠️ Campo vacio`;
+      messageToUser.style.display = 'block';
+      setTimeout(() => {
+        messageToUser.style.display = 'none';
+      }, 3000);
     } else {
       createPost(
         user.uid,
         user.email,
         description,
-      );
+        user.displayName,
+      ).then(() => {
+        showPost();
+      });
     }
   });
+  showPost();
   return divTimeLine;
 };

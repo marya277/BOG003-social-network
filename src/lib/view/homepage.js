@@ -19,7 +19,7 @@ export const home = () => {
       <form class="LogIn">
         <input type="email" placeholder="Email" class="LogIn_input" id="login_email">
         <input type="password" placeholder="Password" class="LogIn_input"  id= "login_password">
-        <p class="form_denied_message" id="form_denied_message"></p>
+        <p class="message_denied" id="form_denied_message"></p>
 
         <button type="submit" class="btonSesion" id="btonSesion">Iniciar Sesión</button>
       </form>
@@ -63,8 +63,6 @@ export const home = () => {
             messageConfirm.style.display = 'block';
             firebase.auth().singout();
           }
-          // const user = userCredential.user;
-        // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -90,11 +88,3 @@ export const home = () => {
   }, 4000);
   return viewHome;
 };
-
-/* <ul>
-<li><a href="#/">Inicio</a></li>
-<li><a href="#/create"></a></li>
-<li><a href="#/profile">Mi Perfil</a></li>
-<li><a href="#/timeLine">Muro</a></li>
-</ul>
-*/

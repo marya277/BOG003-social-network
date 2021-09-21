@@ -6,7 +6,6 @@ export const loginGoogle = () => {
     .signInWithPopup(provider)
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
-      // const credential = result.credential;
       window.location.hash = '#/timeLine';
       // This gives you a Google Access Token. You can use it to access the Google API.
       // const token = credential.accessToken;
@@ -25,14 +24,16 @@ export const loginGoogle = () => {
       console.log('error', errorMessage);
     });
 };
-
-export const createPost = (uid, email, description) => {
+//  Función que crea una colección de las publicaciones
+export const createPost = (uid, email, description, displayName) => {
   const db = firebase.firestore();
 
-  db.collection('posts').add({
+  return db.collection('posts').add({
     uid,
     email,
     description,
+    displayName,
+    fecha: firebase.firestore.FieldValue.serverTimestamp(),
   })
     .then((refDoc) => {
       console.log(refDoc.id);
@@ -45,6 +46,26 @@ export const createPost = (uid, email, description) => {
     });
 };
 
-export const checkPost = () => {
+/* export const checkPost = () => {
+  const db = firebase.firestore();
 
-};
+  db.collection('posts').get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+    // console.log(`${doc.id} => ${doc.data()}`);
+    });
+  });
+}; */
+
+/* export const checkPost = () => {
+  const db = firebase.firestore();
+
+  db.collection('posts').get().then((querySnapshot) => {
+    const post = [];
+    querySnapshot.forEach((doc) => {
+      post.push(doc.data());
+    // console.log(`${doc.id} => ${doc.data()}`);
+    });
+    return console.log(post);
+  });
+}; */
