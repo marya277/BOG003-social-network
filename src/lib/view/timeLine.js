@@ -36,18 +36,27 @@ export const timeLine = () => {
     cards.innerHTML = '';
     db.collection('posts').orderBy('fecha', 'desc').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        const idPost = doc.data();
+        idPost.id = doc.id;
+
         cards.innerHTML += `
         <div class="card_publication">
-        <button id="edit"><i class="fas fa-edit" ></i>  </button>
-        <button id="trash"><i class="fas fa-trash" ></i></button>
-          <h5>${doc.data().displayName}</h5>
+          <h5>${doc.data().displayName}<i class="fas fa-edit" id="edit"></i><i class="fas fa-trash trash" data-id="${idPost.id}"></i></h5>
           <p>${doc.data().description}</p>
           <p>${doc.data().fecha ? doc.data().fecha.toDate() : 'sin fecha'}</p>
         </div>`;
 
-        const edit = divTimeLine.querySelector('#edit');
-        edit.AddEventListener('click', () => {
-          console.log('aqui va delete');
+        const trash = divTimeLine.querySelector('.trash');
+
+        trash.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = e.target.dataset.id;
+          console.log(id);
+          db.collection('posts').doc(id).delete()
+            .then(() => {
+              showPost();
+            })
+            .catch((error) => console.error('Error eliminando documento', error));
         });
       });
     })
@@ -97,6 +106,11 @@ export const timeLine = () => {
         user.displayName,
       ).then(() => {
         showPost();
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
       });
     }
   });
