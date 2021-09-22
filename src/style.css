@@ -469,6 +469,7 @@ h4 {
   margin-right: 20px;
   background-color: #E4F0B5;
   height: auto;
+  width: 90%;
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   float: left;
@@ -477,7 +478,7 @@ h4 {
   margin-left: 30px;
   margin-bottom: 0;
 }
-.card_publication .menu i {
+.card_publication i {
   margin: 0;
   margin-right: 25px;
   margin-bottom: 10px;
@@ -500,7 +501,13 @@ h4 {
   float: right;
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: -404px;
+  margin-right: -181;
+  position: relative;
+  z-index: 2;
+}
+.option {
+  display: none;
 }
 .menu li {
   background-color: #ffff;
@@ -509,13 +516,12 @@ h4 {
   list-style: none;
   cursor: pointer;
   z-index: 2;
-  display: none;
+  
 }
 .menu li:hover {
   background:#FAC45B; 
   color:#fff;
 }
-
 @media only screen and (min-width: 600px) {
   .imgTimeLine {
     margin-top: 20px;

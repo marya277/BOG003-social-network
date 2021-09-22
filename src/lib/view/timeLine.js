@@ -38,23 +38,16 @@ export const timeLine = () => {
       querySnapshot.forEach((doc) => {
         cards.innerHTML += `
         <div class="card_publication">
-        <div class="menu">
-              <i class="fas fa-ellipsis-v" id="menu">
-                <li class"option" id="">Editar</li>
-                <li class"option" id="">Borrar</li>
-              </i>
-          </div>
+        <button id="edit"><i class="fas fa-edit" ></i>  </button>
+        <button id="trash"><i class="fas fa-trash" ></i></button>
           <h5>${doc.data().displayName}</h5>
           <p>${doc.data().description}</p>
           <p>${doc.data().fecha ? doc.data().fecha.toDate() : 'sin fecha'}</p>
         </div>`;
 
-        const menu = divTimeLine.querySelector('#menu');
-        const options = divTimeLine.querySelector('.option');
-
-        menu.addEventListener('click', () => {
-          options.style.display = 'block';
-          console.log('presionaste menu');
+        const edit = divTimeLine.querySelector('#edit');
+        edit.AddEventListener('click', () => {
+          console.log('aqui va delete');
         });
       });
     })
