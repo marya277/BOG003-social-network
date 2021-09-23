@@ -30,28 +30,41 @@ export const timeLine = () => {
   const publication = divTimeLine.querySelector('#publication');
   const messageToUser = divTimeLine.querySelector('#form_denied_message');
 
+  // Función que muestra los posts en el muro
   const showPost = () => {
     const db = firebase.firestore();
     const cards = divTimeLine.querySelector('#cards');
     cards.innerHTML = '';
     db.collection('posts').orderBy('fecha', 'desc').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        const user = firebase.auth().currentUser;
         const idPost = doc.data();
         idPost.id = doc.id;
+        idPost.uid = doc.uid;
+        console.log(user.uid);
+        console.log(doc.data().uid);
 
-        cards.innerHTML += `
+        if (user.uid === doc.data().uid) {
+          cards.innerHTML += `
         <div class="card_publication">
-          <h5>${doc.data().displayName}<i class="fas fa-edit" id="edit"></i><i class="fas fa-trash trash" data-id="${idPost.id}"></i></h5>
+          <h5>${doc.data().displayName}<i class="fas fa-edit edit" data-id="${idPost.id}"></i><i class="fas fa-trash trash" id="trash_${idPost.id}" data-id="${idPost.id}"></i></h5>
           <p>${doc.data().description}</p>
-          <p>${doc.data().fecha ? doc.data().fecha.toDate() : 'sin fecha'}</p>
+          <p>${doc.data().fecha ? doc.data().fecha.toDate().toDateString() : 'sin fecha'}</p>
         </div>`;
-
-        const trash = divTimeLine.querySelector('.trash');
-
+        } else {
+          cards.innerHTML += `
+        <div class="card_publication">
+          <h5>${doc.data().displayName}</h5>
+          <p>${doc.data().description}</p>
+          <p>${doc.data().fecha.toDate().toDateString()}<i class="heart"></i></p>
+        </div>`;
+        }
+      });
+      // Evento sobre cada icono de Trash que borra el post
+      const trashes = divTimeLine.querySelectorAll('.trash');
+      trashes.forEach((trash) => {
         trash.addEventListener('click', (e) => {
-          e.stopPropagation();
           const id = e.target.dataset.id;
-          console.log(id);
           db.collection('posts').doc(id).delete()
             .then(() => {
               showPost();
@@ -59,15 +72,28 @@ export const timeLine = () => {
             .catch((error) => console.error('Error eliminando documento', error));
         });
       });
+
+      const edited = divTimeLine.querySelectorAll('.edit');
+      // console.log(edited);
+      edited.forEach((edit) => {
+        edit.addEventListener('click', () => {
+          /* const id = e.target.dataset.id;
+          console.log(id); */
+        });
+      });
+
+      const hearts = divTimeLine.querySelectorAll('.heart');
+      hearts.forEach((heart) => {
+        heart.addEventListener('click', () => {
+          heart.classList.toggle('heart-animation');
+        });
+      });
     })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
+        console.error('Error al publicar el post', error);
       });
   };
-
+    // evento sobre el icono de Salir, cierra sesion el usuario
   exit.addEventListener('click', (e) => {
     e.preventDefault();
     firebase.auth().signOut()
@@ -75,18 +101,14 @@ export const timeLine = () => {
         window.location.hash = '';
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
+        console.error('Error al cerrar sesión', error);
       });
   });
-
+  // evento sobre el botón Publicar post
   btnPost.addEventListener('click', (e) => {
     e.preventDefault();
     const user = firebase.auth().currentUser;
     const description = publication.value;
-
     if (user == null) {
       messageToUser.innerHTML = `
       ⚠️ para crear el post debe esta logueado`;
@@ -106,11 +128,9 @@ export const timeLine = () => {
         user.displayName,
       ).then(() => {
         showPost();
+        publication.value = '';
       }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
+        console.error('Error al realizar el post', error);
       });
     }
   });
