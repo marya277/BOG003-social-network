@@ -7,20 +7,11 @@ export const loginGoogle = () => {
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
       window.location.hash = '#/timeLine';
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      // const token = credential.accessToken;
-      // The signed-in user info.
       const user = result.user;
       console.log('user', user);
     })
     .catch((error) => {
-      // Handle Errors here.
-      // const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      // const email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      // const credential = error.credential;
       console.log('error', errorMessage);
     });
 };
@@ -45,27 +36,3 @@ export const createPost = (uid, email, description, displayName) => {
       console.log(errorMessage);
     });
 };
-
-/* export const checkPost = () => {
-  const db = firebase.firestore();
-
-  db.collection('posts').get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-    // console.log(`${doc.id} => ${doc.data()}`);
-    });
-  });
-}; */
-
-/* export const checkPost = () => {
-  const db = firebase.firestore();
-
-  db.collection('posts').get().then((querySnapshot) => {
-    const post = [];
-    querySnapshot.forEach((doc) => {
-      post.push(doc.data());
-    // console.log(`${doc.id} => ${doc.data()}`);
-    });
-    return console.log(post);
-  });
-}; */
