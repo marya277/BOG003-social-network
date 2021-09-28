@@ -473,6 +473,8 @@ h4 {
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   float: left;
+  z-index: 1;
+
 }
 .card_publication h5 {
   margin-left: 30px;
@@ -482,6 +484,7 @@ h4 {
   margin: 0;
   margin-right: 25px;
   margin-bottom: 10px;
+  font-size: 20px;
   color: black;
   text-align: center;
   float: right;
@@ -493,10 +496,8 @@ h4 {
   height: auto;
   margin-left: 15px;
   margin-right: 20px;
-  margin-bottom: 0;
   float: left;
   text-align: justify;
-  z-index: 1;
 }
 .edit:hover {
   color: #FAC45B;
@@ -504,19 +505,96 @@ h4 {
 .trash:hover {
   color: #FAC45B;
 }
-.heart {
-  background-image: url('https://i.ibb.co/8sTbrLt/1-MTZW1-G1m-E7-LSX1-Cnh-TYe-HA.png');
-  height: 100px;
-  width: 100px;
+.show {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
 }
-.heart-animation {
-  animation:heart-beat .8s steps(28) 1 forwards;
+.modal {
+  background-color: #fff;
+  position: relative;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  max-width: 90%;
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
- @keyframes heart-beat {
-  from { background-position: left;}
-  to { background-position: right;}
-} 
-
+.modal .close {
+  float: right;
+  font-size: 25px;
+  color: red;
+}
+.modal h3 {
+  text-align: center;
+  font-size: 25px;
+  margin-top: 45px;
+}
+.modal .deletePost {
+  width: 120px;
+  height: 40px;
+  background-color: #7FDBDA;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+.deletePost:hover {
+  background-color: #FAC45B;
+}
+.editPost {
+  width: 80%;
+  height: 30px;
+  margin: 20px 0px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  border-color: #7FDBDA;
+}
+.editPost:focus {
+  outline: 0 none;
+  border: 3px solid #7FDBDA;
+}
+.divEditPost {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+.modalEdit{
+  background-color: #fff;
+  position: relative;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  max-width: 90%;
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+.closeEdit {
+  float: right;
+  font-size: 25px;
+  color: red;
+}
 @media only screen and (min-width: 600px) {
   .imgTimeLine {
     margin-top: 20px;
@@ -577,6 +655,22 @@ h4 {
     height: auto;
     margin-left: 50px;
   }
+  .heart {
+    background-image: url('https://i.ibb.co/8sTbrLt/1-MTZW1-G1m-E7-LSX1-Cnh-TYe-HA.png');
+    height: 100px;
+    width: 100px;
+    font-size: 18px;
+  }
+  .heart-animation {
+    animation:heart-beat .8s steps(28) 1 forwards;
+  }
+   @keyframes heart-beat {
+    from { background-position: left;}
+    to { background-position: right;}
+  }
+  .Heartmovile {
+    display: none;
+  }
 }
 @media only screen and (min-width: 1024px) {
   .imgTimeLine {
@@ -621,5 +715,21 @@ h4 {
   .cards .card_publication {
     margin-left: 0px;
     width: 70%;
+  }
+  .heart {
+    background-image: url('https://i.ibb.co/8sTbrLt/1-MTZW1-G1m-E7-LSX1-Cnh-TYe-HA.png');
+    height: 100px;
+    width: 100px;
+    font-size: 18px;
+  }
+  .heart-animation {
+    animation:heart-beat .8s steps(28) 1 forwards;
+  }
+   @keyframes heart-beat {
+    from { background-position: left;}
+    to { background-position: right;}
+  }
+  .Heartmovile {
+    display: none;
   }
 }

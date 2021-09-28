@@ -1,4 +1,6 @@
 import { createPost } from '../index.js';
+import { modalTrash } from './deletePost.js';
+import { editPost } from './editPost.js';
 
 export const timeLine = () => {
   const divTimeLine = document.createElement('div');
@@ -18,10 +20,7 @@ export const timeLine = () => {
       <button id="btnPost">Publicar</button>
       <p class="message_denied" id="form_denied_message"></p>
     </div>
-    <div class="cards" id="cards">
-    </div>
-    <div class="tres"></div>
-    <div class="cuatro"></div>
+    <div class="cards" id="cards"></div>
   </section>`;
   divTimeLine.innerHTML = viewTimeLine;
 
@@ -41,44 +40,52 @@ export const timeLine = () => {
         const idPost = doc.data();
         idPost.id = doc.id;
         idPost.uid = doc.uid;
-        console.log(user.uid);
-        console.log(doc.data().uid);
 
         if (user.uid === doc.data().uid) {
           cards.innerHTML += `
         <div class="card_publication">
-          <h5>${doc.data().displayName}<i class="fas fa-edit edit" data-id="${idPost.id}"></i><i class="fas fa-trash trash" id="trash_${idPost.id}" data-id="${idPost.id}"></i></h5>
+          <h5>${doc.data().displayName}<i class="fas fa-edit edit" data-id="${idPost.id}"></i><i class="fas fa-trash trash" data-id="${idPost.id}"></i></h5>
           <p>${doc.data().description}</p>
-          <p>${doc.data().fecha ? doc.data().fecha.toDate().toDateString() : 'sin fecha'}</p>
-        </div>`;
+          <p>${doc.data().fecha.toDate().toDateString()}</p>
+        </div>
+        `;
         } else {
           cards.innerHTML += `
         <div class="card_publication">
           <h5>${doc.data().displayName}</h5>
           <p>${doc.data().description}</p>
-          <p>${doc.data().fecha.toDate().toDateString()}<i class="heart"></i></p>
+          <p>${doc.data().fecha.toDate().toDateString()}<i class="heart"></i><i class="fal fa-heart Heartmovile"></i></p>
         </div>`;
         }
       });
-      // Evento sobre cada icono de Trash que borra el post
+      // Evento sobre cada icono de Trash que llama a la ventana modal
       const trashes = divTimeLine.querySelectorAll('.trash');
       trashes.forEach((trash) => {
         trash.addEventListener('click', (e) => {
           const id = e.target.dataset.id;
-          db.collection('posts').doc(id).delete()
-            .then(() => {
-              showPost();
-            })
-            .catch((error) => console.error('Error eliminando documento', error));
+          const modal = modalTrash(id);
+          divTimeLine.appendChild(modal);
         });
       });
 
+      // Evento sobre boton borrar de la ventana Modal
+      /* const deletePost = divTimeLine.querySelector('.deletePost');
+      deletePost.addEventListener('click', (e) => {
+        const id = e.target.dataset.id;
+        console.log(id);
+        db.collection('posts').doc(id).delete()
+          .then(() => {
+            showPost();
+          })
+          .catch((error) => console.error('Error eliminando documento', error));
+      }); */
+
       const edited = divTimeLine.querySelectorAll('.edit');
-      // console.log(edited);
       edited.forEach((edit) => {
-        edit.addEventListener('click', () => {
-          /* const id = e.target.dataset.id;
-          console.log(id); */
+        edit.addEventListener('click', (e) => {
+          const id = e.target.dataset.id;
+          const postEdit = editPost(id);
+          divTimeLine.appendChild(postEdit);
         });
       });
 

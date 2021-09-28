@@ -4,6 +4,8 @@ import { home } from './lib/view/homepage.js';
 import { showTemplate } from './lib/router.js';
 import { create } from './lib/view/create.js';
 import { timeLine } from './lib/view/timeLine.js';
+import { modalTrash } from './lib/view/deletePost.js';
+import { editPost } from './lib/view/editPost.js';
 
 const startApp = () => {
   window.addEventListener('hashchange', () => {
@@ -15,6 +17,14 @@ const startApp = () => {
         case '#/timeLine':
           document.getElementById('root').innerHTML = '';
           document.getElementById('root').appendChild(timeLine());
+          break;
+        case '#/modalTrash':
+          document.getElementById('root').innerHTML = '';
+          document.getElementById('root').appendChild(modalTrash());
+          break;
+        case '#/editPost':
+          document.getElementById('root').innerHTML = '';
+          document.getElementById('root').appendChild(editPost());
           break;
         default:
           break;
