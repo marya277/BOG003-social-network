@@ -36,3 +36,17 @@ export const createPost = (uid, email, description, displayName) => {
       console.log(errorMessage);
     });
 };
+
+export const editingPost = (id, description) => {
+  const db = firebase.firestore();
+  const editInfo = db.collection('posts').doc(id);
+  return editInfo.update({
+    description,
+  })
+    .then(() => {
+      console.log('Aqui esta tu función de editar', description);
+    })
+    .catch((error) => {
+      console.log('Error editing document:', error);
+    });
+};

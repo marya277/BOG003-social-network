@@ -68,18 +68,6 @@ export const timeLine = () => {
         });
       });
 
-      // Evento sobre boton borrar de la ventana Modal
-      /* const deletePost = divTimeLine.querySelector('.deletePost');
-      deletePost.addEventListener('click', (e) => {
-        const id = e.target.dataset.id;
-        console.log(id);
-        db.collection('posts').doc(id).delete()
-          .then(() => {
-            showPost();
-          })
-          .catch((error) => console.error('Error eliminando documento', error));
-      }); */
-
       const edited = divTimeLine.querySelectorAll('.edit');
       edited.forEach((edit) => {
         edit.addEventListener('click', (e) => {
