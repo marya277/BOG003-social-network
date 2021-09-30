@@ -1,4 +1,5 @@
 import { editingPost } from '../index.js';
+import { showPost } from './showPost.js';
 
 export const editPost = (id) => {
   const divEditPost = document.createElement('div');
@@ -29,7 +30,13 @@ export const editPost = (id) => {
   editPosts.forEach((edit) => {
     edit.addEventListener('click', () => {
       const description = inputEdit.value;
-      editingPost(id, description);
+      editingPost(id, description)
+        .then(() => {
+          divEditPost.style.display = 'none';
+          const timeLine = document.querySelector('.timeLine');
+          showPost(timeLine);
+        })
+        .catch((error) => console.error('Error eliminando documento', error));
     });
   });
   closeEdit.forEach((close) => {
