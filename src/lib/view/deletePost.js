@@ -1,3 +1,5 @@
+import { showPost } from './showPost.js';
+
 export const modalTrash = (id) => {
   const divTrash = document.createElement('div');
   divTrash.classList.add('show');
@@ -16,10 +18,11 @@ export const modalTrash = (id) => {
   // Evento sobre boton borrar de la ventana Modal
   deletePosts.forEach((deletePost) => {
     deletePost.addEventListener('click', () => {
-      console.log(id);
       db.collection('posts').doc(id).delete()
         .then(() => {
-          window.location.reload();
+          divTrash.style.display = 'none';
+          const timeLine = document.querySelector('.timeLine');
+          showPost(timeLine);
         })
         .catch((error) => console.error('Error eliminando documento', error));
     });

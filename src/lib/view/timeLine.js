@@ -1,9 +1,9 @@
 import { createPost } from '../index.js';
-import { modalTrash } from './deletePost.js';
-import { editPost } from './editPost.js';
+import { showPost } from './showPost.js';
 
 export const timeLine = () => {
   const divTimeLine = document.createElement('div');
+  divTimeLine.classList.add('timeLine');
   const viewTimeLine = `
   <header>
     <div class="headerPrincipal">
@@ -30,65 +30,7 @@ export const timeLine = () => {
   const messageToUser = divTimeLine.querySelector('#form_denied_message');
 
   // Función que muestra los posts en el muro
-  const showPost = () => {
-    const db = firebase.firestore();
-    const cards = divTimeLine.querySelector('#cards');
-    cards.innerHTML = '';
-    db.collection('posts').orderBy('fecha', 'desc').get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        const user = firebase.auth().currentUser;
-        const idPost = doc.data();
-        idPost.id = doc.id;
-        idPost.uid = doc.uid;
-
-        if (user.uid === doc.data().uid) {
-          cards.innerHTML += `
-        <div class="card_publication">
-          <h5>${doc.data().displayName}<i class="fas fa-edit edit" data-id="${idPost.id}"></i><i class="fas fa-trash trash" data-id="${idPost.id}"></i></h5>
-          <p>${doc.data().description}</p>
-          <p>${doc.data().fecha.toDate().toDateString()}</p>
-        </div>
-        `;
-        } else {
-          cards.innerHTML += `
-        <div class="card_publication">
-          <h5>${doc.data().displayName}</h5>
-          <p>${doc.data().description}</p>
-          <p>${doc.data().fecha.toDate().toDateString()}<i class="heart"></i><i class="fal fa-heart Heartmovile"></i></p>
-        </div>`;
-        }
-      });
-      // Evento sobre cada icono de Trash que llama a la ventana modal
-      const trashes = divTimeLine.querySelectorAll('.trash');
-      trashes.forEach((trash) => {
-        trash.addEventListener('click', (e) => {
-          const id = e.target.dataset.id;
-          const modal = modalTrash(id);
-          divTimeLine.appendChild(modal);
-        });
-      });
-
-      const edited = divTimeLine.querySelectorAll('.edit');
-      edited.forEach((edit) => {
-        edit.addEventListener('click', (e) => {
-          const id = e.target.dataset.id;
-          const postEdit = editPost(id);
-          divTimeLine.appendChild(postEdit);
-        });
-      });
-
-      const hearts = divTimeLine.querySelectorAll('.heart');
-      hearts.forEach((heart) => {
-        heart.addEventListener('click', () => {
-          heart.classList.toggle('heart-animation');
-        });
-      });
-    })
-      .catch((error) => {
-        console.error('Error al publicar el post', error);
-      });
-  };
-    // evento sobre el icono de Salir, cierra sesion el usuario
+  // evento sobre el icono de Salir, cierra sesion el usuario
   exit.addEventListener('click', (e) => {
     e.preventDefault();
     firebase.auth().signOut()
@@ -122,13 +64,13 @@ export const timeLine = () => {
         description,
         user.displayName,
       ).then(() => {
-        showPost();
+        showPost(divTimeLine);
         publication.value = '';
       }).catch((error) => {
         console.error('Error al realizar el post', error);
       });
     }
   });
-  showPost();
+  showPost(divTimeLine);
   return divTimeLine;
 };
