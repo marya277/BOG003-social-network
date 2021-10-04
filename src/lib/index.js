@@ -50,3 +50,8 @@ export const editingPost = (id, description) => {
       console.log('Error editing document:', error);
     });
 };
+
+export const createCounter = (ref, like) => {
+  const db = firebase.firestore();
+  
+};

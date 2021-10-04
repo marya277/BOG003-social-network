@@ -25,7 +25,7 @@ export const showPost = (divTimeLine) => {
         <div class="card_publication">
           <h5>${doc.data().displayName}</h5>
           <p>${doc.data().description}</p>
-          <p>${doc.data().fecha.toDate().toDateString()}<i class="heart"></i><i class="fal fa-heart Heartmovile"></i></p>
+          <p>${doc.data().fecha.toDate().toDateString()}<i class="fas fa-heart heart"></i></p>
         </div>`;
       }
     });
@@ -50,7 +50,7 @@ export const showPost = (divTimeLine) => {
     const hearts = divTimeLine.querySelectorAll('.heart');
     hearts.forEach((heart) => {
       heart.addEventListener('click', () => {
-        heart.classList.toggle('heart-animation');
+        console.log('Aqui estoy <3');
       });
     });
   })
