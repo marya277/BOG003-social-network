@@ -25,33 +25,32 @@ export const createPost = (uid, email, description, displayName) => {
     description,
     displayName,
     fecha: firebase.firestore.FieldValue.serverTimestamp(),
-  })
-    .then((refDoc) => {
-      console.log(refDoc.id);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
-    });
+  });
 };
 
+//  Función editar las publicaciones
 export const editingPost = (id, description) => {
   const db = firebase.firestore();
   const editInfo = db.collection('posts').doc(id);
   return editInfo.update({
     description,
-  })
-    .then(() => {
-      console.log('Aqui esta tu función de editar', description);
-    })
-    .catch((error) => {
-      console.log('Error editing document:', error);
-    });
+  });
 };
 
-export const createCounter = (ref, like) => {
+// Función crear los likes las publicaciones
+export const createLike = (id, uid) => {
   const db = firebase.firestore();
-  
+  const likePost = db.collection('posts').doc(id);
+  likePost.update({
+    likes: firebase.firestore.FieldValue.arrayUnion(uid),
+  });
+};
+
+// Función quitar los likes las publicaciones
+export const removeLike = (id, uid) => {
+  const db = firebase.firestore();
+  const likePost = db.collection('posts').doc(id);
+  likePost.update({
+    likes: firebase.firestore.FieldValue.arrayRemove(uid),
+  });
 };
