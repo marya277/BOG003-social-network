@@ -1,6 +1,6 @@
 RED SOCIAL ANDARIEGOS
 ===
-![pagina inicial](img/viajeros1.jpg)
+![pagina inicial](https://github.com/marya277/BOG003-social-network/blob/main/src/img/viajeros1.jpg?raw=true)
 
 ## Índice de contenidos
 * [Resúmen del proyecto](#Resúmen)
@@ -25,13 +25,13 @@ El objetivo principal de aprendizaje de este proyecto es construir una Single-pa
 #### Investigación UX
 --
 Realizamos una encuesta a diferentes usuarios para definir la estructura de la red social donde se definió el nombre que llevaría, la paleta de colores a utilizar y el botón de like que se mostraría. Con base en estas respuestas se creo el prototipo de baja fidelidad y seguidamente el prototipo de alta fidelidad en  figma.
-![encuesta](img/nombre.png)
+![encuesta](https://github.com/marya277/BOG003-social-network/blob/main/src/img/nombre.png?raw=true)
 --
-![encuesta](img/datos1.png)
+![encuesta](https://github.com/marya277/BOG003-social-network/blob/main/src/img/datos1.png?raw=true)
 --
-![prototipo](img/prototipo1.jpg)
+![prototipo](https://github.com/marya277/BOG003-social-network/blob/main/src/img/prototipo1.jpg?raw=true)
 --
-![prototipo1](img/prototipo2.jpg)
+![prototipo1](https://github.com/marya277/BOG003-social-network/blob/main/src/img/prototipo2.jpg?raw=true)
 --
 ## Historias de usuario
 #### Historia de usuario 1
@@ -52,6 +52,6 @@ Yo como Usuario de "Andariegos" me gustaría poder hacer publicaciones para comp
 * Función para dar y quitar likes a las publicaciones propias y de otros.
 * Cerrar sesión en la aplicación.
 ### Producto final
-![producto1](img/mobile.png)
+![producto1](https://github.com/marya277/BOG003-social-network/blob/main/src/img/mobile.png?raw=true)
 --
-![producto2](img/tablet.png)
+![producto2](https://github.com/marya277/BOG003-social-network/blob/main/src/img/tablet.png?raw=true)
