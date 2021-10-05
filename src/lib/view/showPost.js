@@ -1,5 +1,6 @@
 import { modalTrash } from './deletePost.js';
 import { editPost } from './editPost.js';
+import { createLike, removeLike } from '../index.js';
 
 export const showPost = (divTimeLine) => {
   const db = firebase.firestore();
@@ -25,7 +26,7 @@ export const showPost = (divTimeLine) => {
         <div class="card_publication">
           <h5>${doc.data().displayName}</h5>
           <p>${doc.data().description}</p>
-          <p>${doc.data().fecha.toDate().toDateString()}<i class="heart"></i><i class="fal fa-heart Heartmovile"></i></p>
+          <p>${doc.data().fecha.toDate().toDateString()}<i class="fas fa-heart heart" data-id="${idPost.id}"></i></p>
         </div>`;
       }
     });
@@ -47,10 +48,26 @@ export const showPost = (divTimeLine) => {
         divTimeLine.appendChild(postEdit);
       });
     });
+
     const hearts = divTimeLine.querySelectorAll('.heart');
     hearts.forEach((heart) => {
-      heart.addEventListener('click', () => {
-        heart.classList.toggle('heart-animation');
+      heart.addEventListener('click', (e) => {
+        const id = e.target.dataset.id;
+        const user = firebase.auth().currentUser.uid;
+        db.collection('posts').doc(id).get().then((doc) => {
+          const likesArray = doc.data().likes;
+
+          if (likesArray.includes(user)) {
+            removeLike(id, user);
+            heart.style.color = 'darkgrey';
+          } else {
+            createLike(id, user);
+            heart.style.color = 'red';
+          }
+        })
+          .catch((error) => {
+            console.log(error);
+          });
       });
     });
   })
